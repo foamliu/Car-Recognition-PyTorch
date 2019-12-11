@@ -3,7 +3,6 @@
 import os
 import random
 import shutil
-import tarfile
 
 import cv2 as cv
 import numpy as np
@@ -134,22 +133,6 @@ def process_test_data():
 
 
 if __name__ == '__main__':
-    # parameters
-    img_width, img_height = 224, 224
-
-    print('Extracting cars_train.tgz...')
-    if not os.path.exists('cars_train'):
-        with tarfile.open('cars_train.tgz', "r:gz") as tar:
-            tar.extractall()
-    print('Extracting cars_test.tgz...')
-    if not os.path.exists('cars_test'):
-        with tarfile.open('cars_test.tgz', "r:gz") as tar:
-            tar.extractall()
-    print('Extracting car_devkit.tgz...')
-    if not os.path.exists('devkit'):
-        with tarfile.open('car_devkit.tgz', "r:gz") as tar:
-            tar.extractall()
-
     cars_meta = scipy.io.loadmat('devkit/cars_meta')
     class_names = cars_meta['class_names']  # shape=(1, 196)
     class_names = np.transpose(class_names)
