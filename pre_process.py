@@ -163,8 +163,8 @@ if __name__ == '__main__':
     process_test_data()
 
     # clean up
-    shutil.rmtree('data/cars_train')
-    shutil.rmtree('data/cars_test')
+    # shutil.rmtree('data/cars_train')
+    # shutil.rmtree('data/cars_test')
     # shutil.rmtree('devkit')
 
     with open('data/train.pkl', 'rb') as fp:
