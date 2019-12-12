@@ -35,7 +35,7 @@ class CarRecognitionDataset(Dataset):
         sample = self.samples[i]
         full_path = sample['full_path']
         label = sample['label']
-        img = Image.open(full_path, 'RGB')
+        img = Image.open(full_path)
         # img = cv.imread(full_path)
         #
         # img = img[..., ::-1]  # RGB
@@ -69,7 +69,7 @@ if __name__ == "__main__":
     full_path = sample['full_path']
     label = sample['label']
     # img = cv.imread(full_path)
-    img = Image.open(full_path, 'RGB')
+    img = Image.open(full_path)
     # img = img[..., ::-1]  # RGB
     # img = transforms.ToPILImage()(img)
     img = transformer(img)
