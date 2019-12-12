@@ -7,13 +7,13 @@ num_classes = 196
 num_channels = 3
 
 train_data = 'data/train'
-valid_data = 'data/valid'
+valid_data = 'data/test'
 
 num_train_samples = 6549
 num_valid_samples = 1595
 verbose = 1
-batch_size = 16
-num_epochs = 100000
+batch_size = 32
+num_epochs = 1000
 patience = 50
 
 # Training parameters

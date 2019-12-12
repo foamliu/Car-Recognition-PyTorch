@@ -24,7 +24,7 @@ data_transforms = {
 }
 
 
-class ImgClsDataset(Dataset):
+class CarRecognitionDataset(Dataset):
     def __init__(self, split):
         filename = '{}.json'.format(split)
         with open(filename, 'r') as file:
@@ -50,9 +50,9 @@ class ImgClsDataset(Dataset):
 
 
 if __name__ == "__main__":
-    train = ImgClsDataset('train')
+    train = CarRecognitionDataset('train')
     print('num_train: ' + str(len(train)))
-    valid = ImgClsDataset('valid')
+    valid = CarRecognitionDataset('valid')
     print('num_valid: ' + str(len(valid)))
 
     print(train[0])

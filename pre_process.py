@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import pickle
 import random
 import shutil
 
@@ -8,6 +9,8 @@ import cv2 as cv
 import numpy as np
 import scipy.io
 from tqdm import tqdm
+
+from config import im_size
 
 
 def ensure_folder(folder):
@@ -23,6 +26,8 @@ def save_train_data(fnames, labels, bboxes):
     num_train = int(round(num_samples * train_split))
     train_indexes = random.sample(range(num_samples), num_train)
 
+    train = []
+    valid = []
     print('Save train data...')
     for i in tqdm(range(num_samples)):
         fname = fnames[i]
@@ -51,8 +56,19 @@ def save_train_data(fnames, labels, bboxes):
         dst_path = os.path.join(dst_path, fname)
 
         crop_image = src_image[y1:y2, x1:x2]
-        dst_img = cv.resize(src=crop_image, dsize=(img_height, img_width))
+        dst_img = cv.resize(src=crop_image, dsize=(im_size, im_size))
         cv.imwrite(dst_path, dst_img)
+
+        if i in train_indexes:
+            train.append({'full_path': dst_path, 'label': label})
+        else:
+            valid.append({'full_path': dst_path, 'label': label})
+
+    with open('data/train.pkl', 'wb') as fp:
+        pickle.dump(train, fp)
+
+    with open('data/valid.pkl', 'wb') as fp:
+        pickle.dump(valid, fp)
 
 
 def save_test_data(fnames, bboxes):
@@ -77,7 +93,7 @@ def save_test_data(fnames, bboxes):
 
         dst_path = os.path.join(dst_folder, fname)
         crop_image = src_image[y1:y2, x1:x2]
-        dst_img = cv.resize(src=crop_image, dsize=(img_height, img_width))
+        dst_img = cv.resize(src=crop_image, dsize=(im_size, im_size))
         cv.imwrite(dst_path, dst_img)
 
 

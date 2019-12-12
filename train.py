@@ -3,11 +3,11 @@ import torch
 from torch import nn
 from torch.utils.tensorboard import SummaryWriter
 
-from config import device, grad_clip, print_freq, num_workers, num_classes
-from data_gen import ImgClsDataset
-# from models import ImgClsModel
-from mobilenet_v2 import MobileNetV2
-from utils import parse_args, save_checkpoint, AverageMeter, clip_gradient, get_logger, accuracy, get_learning_rate
+from config import device, grad_clip, print_freq, num_workers
+from data_gen import CarRecognitionDataset
+from models import CarRecognitionModel
+from utils import parse_args, save_checkpoint, AverageMeter, clip_gradient, get_logger, accuracy, get_learning_rate, \
+    adjust_learning_rate
 
 
 def train_net(args):
@@ -21,8 +21,7 @@ def train_net(args):
 
     # Initialize / load checkpoint
     if checkpoint is None:
-        # model = ImgClsModel()
-        model = MobileNetV2(num_classes=num_classes)
+        model = CarRecognitionModel()
         model = nn.DataParallel(model)
 
         optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
@@ -40,13 +39,13 @@ def train_net(args):
     model = model.to(device)
 
     # Loss function
-    criterion = nn.CrossEntropyLoss().to(device)
+    criterion = nn.CrossEntropyLoss()
 
     # Custom dataloaders
-    train_dataset = ImgClsDataset('train')
+    train_dataset = CarRecognitionDataset('train')
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True,
                                                num_workers=num_workers)
-    valid_dataset = ImgClsDataset('valid')
+    valid_dataset = CarRecognitionDataset('valid')
     valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=args.batch_size, shuffle=False,
                                                num_workers=num_workers)
 
@@ -55,8 +54,8 @@ def train_net(args):
     # Epochs
     for epoch in range(start_epoch, args.end_epoch):
         # Decay learning rate if there is no improvement for 10 consecutive epochs
-        # if epochs_since_improvement > 0 and epochs_since_improvement % 8 == 0:
-        #     adjust_learning_rate(optimizer, 0.1)
+        if epochs_since_improvement > 0 and epochs_since_improvement % 8 == 0:
+            adjust_learning_rate(optimizer, 0.1)
 
         # One epoch's training
         train_loss, train_acc = train(train_loader=train_loader,
@@ -104,7 +103,7 @@ def train(train_loader, model, criterion, optimizer, epoch, logger):
     for i, (img, label) in enumerate(train_loader):
         # Move to GPU, if available
         img = img.to(device)  # [N, 3, 224, 224]
-        label = label.to(device)  # [N, 3]
+        label = label.to(device)  # [N, 196]
 
         # Forward prop.
         out = model(img)
@@ -151,7 +150,7 @@ def valid(valid_loader, model, criterion, logger):
     for i, (img, label) in enumerate(valid_loader):
         # Move to GPU, if available
         img = img.to(device)  # [N, 3, 224, 224]
-        label = label.to(device)  # [N, 3]
+        label = label.to(device)  # [N, 196]
 
         # Forward prop.
         out = model(img)
