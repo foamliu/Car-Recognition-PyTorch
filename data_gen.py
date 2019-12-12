@@ -1,4 +1,4 @@
-import json
+import pickle
 
 import cv2 as cv
 from torch.utils.data import Dataset
@@ -28,7 +28,7 @@ class CarRecognitionDataset(Dataset):
     def __init__(self, split):
         filename = 'data/{}.pkl'.format(split)
         with open(filename, 'rb') as file:
-            samples = json.load(file)
+            samples = pickle.load(file)
 
         self.samples = samples
 
