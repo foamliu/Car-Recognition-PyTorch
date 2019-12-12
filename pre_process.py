@@ -3,7 +3,6 @@
 import os
 import pickle
 import random
-import shutil
 
 import cv2 as cv
 import numpy as np
@@ -60,9 +59,9 @@ def save_train_data(fnames, labels, bboxes):
         cv.imwrite(dst_path, dst_img)
 
         if i in train_indexes:
-            train.append({'full_path': dst_path, 'label': label})
+            train.append({'full_path': dst_path, 'label': (label - 1)})
         else:
-            valid.append({'full_path': dst_path, 'label': label})
+            valid.append({'full_path': dst_path, 'label': (label - 1)})
 
     with open('data/train.pkl', 'wb') as fp:
         pickle.dump(train, fp)
