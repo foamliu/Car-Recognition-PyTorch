@@ -26,7 +26,7 @@ data_transforms = {
 
 class CarRecognitionDataset(Dataset):
     def __init__(self, split):
-        filename = '{}.pkl'.format(split)
+        filename = 'data/{}.pkl'.format(split)
         with open(filename, 'r') as file:
             samples = json.load(file)
 
@@ -36,7 +36,7 @@ class CarRecognitionDataset(Dataset):
 
     def __getitem__(self, i):
         sample = self.samples[i]
-        full_path = sample['img_path']
+        full_path = sample['full_path']
         label = sample['label']
         img = cv.imread(full_path)
 
