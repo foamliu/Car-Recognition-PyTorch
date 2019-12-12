@@ -37,11 +37,11 @@ def save_train_data(fnames, labels, bboxes):
         src_image = cv.imread(src_path)
         height, width = src_image.shape[:2]
         # margins of 16 pixels
-        margin = 16
-        x1 = max(0, x1 - margin)
-        y1 = max(0, y1 - margin)
-        x2 = min(x2 + margin, width)
-        y2 = min(y2 + margin, height)
+        # margin = 16
+        # x1 = max(0, x1 - margin)
+        # y1 = max(0, y1 - margin)
+        # x2 = min(x2 + margin, width)
+        # y2 = min(y2 + margin, height)
         # print("{} -> {}".format(fname, label))
 
         if i in train_indexes:
@@ -54,9 +54,9 @@ def save_train_data(fnames, labels, bboxes):
             os.makedirs(dst_path)
         dst_path = os.path.join(dst_path, fname)
 
-        crop_image = src_image[y1:y2, x1:x2]
-        dst_img = cv.resize(src=crop_image, dsize=(im_size, im_size))
-        cv.imwrite(dst_path, dst_img)
+        # crop_image = src_image[y1:y2, x1:x2]
+        # dst_img = cv.resize(src=crop_image, dsize=(im_size, im_size))
+        cv.imwrite(dst_path, src_image)
 
         if i in train_indexes:
             train.append({'full_path': dst_path, 'label': (int(label) - 1)})
