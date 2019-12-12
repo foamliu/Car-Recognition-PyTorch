@@ -63,9 +63,11 @@ def save_train_data(fnames, labels, bboxes):
         else:
             valid.append({'full_path': dst_path, 'label': (int(label) - 1)})
 
+    print('num_train: ' + str(len(train)))
     with open('data/train.pkl', 'wb') as fp:
         pickle.dump(train, fp)
 
+    print('num_valid: ' + str(len(valid)))
     with open('data/valid.pkl', 'wb') as fp:
         pickle.dump(valid, fp)
 
