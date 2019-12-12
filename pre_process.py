@@ -59,9 +59,9 @@ def save_train_data(fnames, labels, bboxes):
         cv.imwrite(dst_path, dst_img)
 
         if i in train_indexes:
-            train.append({'full_path': dst_path, 'label': (label - 1)})
+            train.append({'full_path': dst_path, 'label': (int(label) - 1)})
         else:
-            valid.append({'full_path': dst_path, 'label': (label - 1)})
+            valid.append({'full_path': dst_path, 'label': (int(label) - 1)})
 
     with open('data/train.pkl', 'wb') as fp:
         pickle.dump(train, fp)
