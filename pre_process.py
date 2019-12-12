@@ -19,7 +19,7 @@ def ensure_folder(folder):
 
 
 def save_train_data(fnames, labels, bboxes):
-    src_folder = 'cars_train'
+    src_folder = 'data/cars_train'
     num_samples = len(fnames)
 
     train_split = 0.8
@@ -72,7 +72,7 @@ def save_train_data(fnames, labels, bboxes):
 
 
 def save_test_data(fnames, bboxes):
-    src_folder = 'cars_test'
+    src_folder = 'data/cars_test'
     dst_folder = 'data/test'
     num_samples = len(fnames)
 
@@ -129,7 +129,7 @@ def process_train_data():
 
 def process_test_data():
     print("Processing test data...")
-    cars_annos = scipy.io.loadmat('devkit/cars_test_annos')
+    cars_annos = scipy.io.loadmat('data/devkit/cars_test_annos')
     annotations = cars_annos['annotations']
     annotations = np.transpose(annotations)
 
@@ -149,7 +149,7 @@ def process_test_data():
 
 
 if __name__ == '__main__':
-    cars_meta = scipy.io.loadmat('devkit/cars_meta')
+    cars_meta = scipy.io.loadmat('data/devkit/cars_meta')
     class_names = cars_meta['class_names']  # shape=(1, 196)
     class_names = np.transpose(class_names)
     print('class_names.shape: ' + str(class_names.shape))
@@ -163,6 +163,6 @@ if __name__ == '__main__':
     process_test_data()
 
     # clean up
-    shutil.rmtree('cars_train')
-    shutil.rmtree('cars_test')
+    shutil.rmtree('data/cars_train')
+    shutil.rmtree('data/cars_test')
     # shutil.rmtree('devkit')
