@@ -24,7 +24,8 @@ def train_net(args):
         model = CarRecognitionModel()
         model = nn.DataParallel(model)
 
-        optimizer = torch.optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, nesterov=True, weight_decay=1e-6)
+        # optimizer = torch.optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, nesterov=True, weight_decay=1e-6)
+        optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=1e-6)
 
     else:
         checkpoint = torch.load(checkpoint)
