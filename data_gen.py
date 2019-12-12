@@ -49,7 +49,7 @@ class CarRecognitionDataset(Dataset):
 if __name__ == "__main__":
     train = CarRecognitionDataset('train')
     print('num_train: ' + str(len(train)))
-    valid = CarRecognitionDataset('val')
+    valid = CarRecognitionDataset('valid')
     print('num_valid: ' + str(len(valid)))
 
     print(train[0])
