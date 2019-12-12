@@ -73,5 +73,7 @@ if __name__ == "__main__":
     img = transforms.ToPILImage()(img)
     img = transformer(img)
 
-    cv.imshow('image', img)
-    cv.waitKey(0)
+    img.show()
+
+    # cv.imshow('image', img)
+    # cv.waitKey(0)
