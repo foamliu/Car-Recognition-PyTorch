@@ -10,7 +10,6 @@ data_transforms = {
     'train': transforms.Compose([
         transforms.RandomAffine(degrees=20, translate=(0.1, 0.1), scale=(0.8, 1.2)),
         transforms.RandomHorizontalFlip(),
-        transforms.ColorJitter(brightness=0.125, contrast=0.125, saturation=0.125),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
     ]),
@@ -50,7 +49,7 @@ class CarRecognitionDataset(Dataset):
 if __name__ == "__main__":
     train = CarRecognitionDataset('train')
     print('num_train: ' + str(len(train)))
-    valid = CarRecognitionDataset('valid')
+    valid = CarRecognitionDataset('val')
     print('num_valid: ' + str(len(valid)))
 
     print(train[0])
