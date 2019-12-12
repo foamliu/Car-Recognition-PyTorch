@@ -99,7 +99,7 @@ def save_test_data(fnames, bboxes):
 
 def process_train_data():
     print("Processing train data...")
-    cars_annos = scipy.io.loadmat('devkit/cars_train_annos')
+    cars_annos = scipy.io.loadmat('data/devkit/cars_train_annos')
     annotations = cars_annos['annotations']
     annotations = np.transpose(annotations)
 
