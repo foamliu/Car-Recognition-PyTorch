@@ -47,10 +47,31 @@ class CarRecognitionDataset(Dataset):
 
 
 if __name__ == "__main__":
-    train = CarRecognitionDataset('train')
-    print('num_train: ' + str(len(train)))
-    valid = CarRecognitionDataset('valid')
-    print('num_valid: ' + str(len(valid)))
+    # train = CarRecognitionDataset('train')
+    # print('num_train: ' + str(len(train)))
+    # valid = CarRecognitionDataset('valid')
+    # print('num_valid: ' + str(len(valid)))
+    #
+    # print(train[0])
+    # print(valid[0])
+    filename = 'data/{}.pkl'.format('valid')
+    with open(filename, 'rb') as file:
+        samples = pickle.load(file)
 
-    print(train[0])
-    print(valid[0])
+    transformer = transforms.Compose([
+        transforms.RandomAffine(degrees=20, translate=(0.1, 0.1), scale=(0.8, 1.2)),
+        transforms.RandomHorizontalFlip(),
+    ])
+
+    sample = samples[0]
+
+    full_path = sample['full_path']
+    label = sample['label']
+    img = cv.imread(full_path)
+
+    img = img[..., ::-1]  # RGB
+    img = transforms.ToPILImage()(img)
+    img = transformer(img)
+
+    cv.imshow('image', img)
+    cv.waitKey(0)
