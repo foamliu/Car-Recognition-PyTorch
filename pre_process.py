@@ -166,3 +166,8 @@ if __name__ == '__main__':
     shutil.rmtree('data/cars_train')
     shutil.rmtree('data/cars_test')
     # shutil.rmtree('devkit')
+
+    with open('data/train.pkl', 'rb') as fp:
+        train = pickle.load(fp)
+
+    print(train[:10])
