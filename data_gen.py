@@ -26,7 +26,7 @@ data_transforms = {
 
 class CarRecognitionDataset(Dataset):
     def __init__(self, split):
-        filename = '{}.json'.format(split)
+        filename = '{}.pkl'.format(split)
         with open(filename, 'r') as file:
             samples = json.load(file)
 
