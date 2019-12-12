@@ -1,6 +1,6 @@
 import pickle
+
 from PIL import Image
-import cv2 as cv
 from torch.utils.data import Dataset
 from torchvision import transforms
 
@@ -36,10 +36,6 @@ class CarRecognitionDataset(Dataset):
         full_path = sample['full_path']
         label = sample['label']
         img = Image.open(full_path)
-        # img = cv.imread(full_path)
-        #
-        # img = img[..., ::-1]  # RGB
-        # img = transforms.ToPILImage()(img)
         img = self.transformer(img)
         return img, label
 
@@ -68,13 +64,7 @@ if __name__ == "__main__":
 
     full_path = sample['full_path']
     label = sample['label']
-    # img = cv.imread(full_path)
     img = Image.open(full_path)
-    # img = img[..., ::-1]  # RGB
-    # img = transforms.ToPILImage()(img)
     img = transformer(img)
 
     img.show()
-
-    # cv.imshow('image', img)
-    # cv.waitKey(0)
