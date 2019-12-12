@@ -53,8 +53,10 @@ def train_net(args):
 
     # Epochs
     for epoch in range(start_epoch, args.end_epoch):
+        if epochs_since_improvement > 50:
+            break
         # Decay learning rate if there is no improvement for 10 consecutive epochs
-        if epochs_since_improvement > 0 and epochs_since_improvement % 8 == 0:
+        if epochs_since_improvement > 0 and epochs_since_improvement % 12 == 0:
             adjust_learning_rate(optimizer, 0.1)
 
         # One epoch's training
