@@ -29,6 +29,7 @@ if __name__ == '__main__':
         img.save('images/{}_out.png'.format(i))
         img = transformer(img)
         imgs = img.unsqueeze(dim=0)
+        imgs = imgs.to(device)
 
         with torch.no_grad():
             preds = model(imgs)
