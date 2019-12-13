@@ -8,7 +8,7 @@ from config import num_classes
 class CarRecognitionModel(nn.Module):
     def __init__(self):
         super(CarRecognitionModel, self).__init__()
-        resnet = models.resnet50(pretrained=True)
+        resnet = models.resnet152(pretrained=True)
         # Remove linear layer
         modules = list(resnet.children())[:-1]
         self.resnet = nn.Sequential(*modules)
