@@ -38,6 +38,7 @@ if __name__ == '__main__':
         img = transformer(img)
         imgs = img.unsqueeze(dim=0)
         preds = model(imgs)
+        preds = preds.cpu().numpy()[0]
         prob = np.max(preds)
         class_id = np.argmax(preds)
         text = ('Predict: {}, prob: {}'.format(class_names[class_id][0][0], prob))
