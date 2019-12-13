@@ -37,7 +37,10 @@ if __name__ == '__main__':
         img.save('images/{}_out.png'.format(i))
         img = transformer(img)
         imgs = img.unsqueeze(dim=0)
-        preds = model(imgs)
+
+        with torch.no_grad():
+            preds = model(imgs)
+
         preds = preds.cpu().numpy()[0]
         prob = np.max(preds)
         class_id = np.argmax(preds)
