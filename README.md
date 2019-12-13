@@ -92,12 +92,12 @@ prob: 0.9999994
 1 | 2 | 3 | 4 |
 |---|---|---|---|
 |![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/0_out.png)  | ![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/1_out.png) | ![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/2_out.png)|![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/3_out.png) |
-|Hyundai Azera Sedan 2012, prob: 0.99|Hyundai Genesis Sedan 2012, prob: 0.9995|Cadillac Escalade EXT Crew Cab 2007, prob: 1.0|Lamborghini Gallardo LP 570-4 Superleggera 2012, prob: 1.0|
+|Ferrari 458 Italia Convertible 2012, prob: 0.9993|Buick Rainier SUV 2007, prob: 0.9707|Dodge Dakota Club Cab 2007, prob: 1.0|Dodge Magnum Wagon 2008, prob: 1.0|
 |![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/4_out.png)  | ![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/5_out.png) | ![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/6_out.png)|![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/7_out.png) |
-|BMW 1 Series Coupe 2012, prob: 0.9948|Suzuki Aerio Sedan 2007, prob: 0.9982|Ford Mustang Convertible 2007, prob: 1.0|BMW 1 Series Convertible 2012, prob: 1.0|
+|Hyundai Azera Sedan 2012, prob: 0.9955|BMW 3 Series Sedan 2012, prob: 1.0|Mercedes-Benz 300-Class Convertible 1993, prob: 0.9959|McLaren MP4-12C Coupe 2012, prob: 1.0|
 |![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/8_out.png)  | ![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/9_out.png) | ![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/10_out.png)|![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/11_out.png)|
-|Mitsubishi Lancer Sedan 2012, prob: 0.4401|Cadillac CTS-V Sedan 2012, prob: 0.9801|Chevrolet Traverse SUV 2012, prob: 0.9999|Bentley Continental GT Coupe 2012, prob: 0.9953|
+|Ford Freestar Minivan 2007, prob: 0.712|Buick Regal GS 2012, prob: 1.0|Toyota Corolla Sedan 2012, prob: 0.7908|Lincoln Town Car Sedan 2011, prob: 1.0|
 |![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/12_out.png) | ![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/13_out.png)| ![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/14_out.png)|![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/15_out.png)|
-|Nissan Juke Hatchback 2012, prob: 0.9935|Chevrolet TrailBlazer SS 2009, prob: 0.987|Hyundai Accent Sedan 2012, prob: 0.9826|Ford Fiesta Sedan 2012, prob: 0.6502|
+|Audi V8 Sedan 1994, prob: 0.9453|Daewoo Nubira Wagon 2002, prob: 0.52|Chrysler 300 SRT-8 2010, prob: 1.0|Ford F-150 Regular Cab 2007, prob: 1.0|
 |![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/16_out.png) | ![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/17_out.png)|![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/18_out.png) | ![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/19_out.png)|
-|Acura TL Sedan 2012, prob: 0.9999|Aston Martin V8 Vantage Coupe 2012, prob: 0.5487|Infiniti G Coupe IPL 2012, prob: 0.2621|Ford F-150 Regular Cab 2012, prob: 0.9995|
+|Dodge Caravan Minivan 1997, prob: 1.0|BMW M6 Convertible 2010, prob: 0.3966|Nissan Leaf Hatchback 2012, prob: 0.6143|Honda Accord Coupe 2012, prob: 0.9997|

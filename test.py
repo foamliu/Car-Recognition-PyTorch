@@ -22,7 +22,7 @@ if __name__ == '__main__':
     print('Predicting test data')
     num_samples = 8041
     start = time.time()
-    out = open('result.txt', 'a')
+    out = open('result.txt', 'w')
     for i in tqdm(range(num_samples)):
         full_path = os.path.join('data/test', '%05d.jpg' % (i + 1))
         img = Image.open(full_path)
