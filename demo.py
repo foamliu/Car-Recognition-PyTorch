@@ -3,19 +3,21 @@ import json
 import os
 import random
 
-import cv2 as cv
 import numpy as np
 import scipy.io
 import torch
+from PIL import Image
 
+from data_gen import data_transforms
 from models import CarRecognitionModel
 
 if __name__ == '__main__':
-    img_width, img_height = 224, 224
     filename = 'car_recognition.pt'
     model = CarRecognitionModel()
     model.load_state_dict(torch.load(filename))
     model.eval()
+
+    transformer = data_transforms['valid']
 
     cars_meta = scipy.io.loadmat('data/devkit/cars_meta')
     class_names = cars_meta['class_names']  # shape=(1, 196)
@@ -29,21 +31,18 @@ if __name__ == '__main__':
     samples = random.sample(test_images, num_samples)
     results = []
     for i, image_name in enumerate(samples):
-        filename = os.path.join(test_path, image_name)
-        print('Start processing image: {}'.format(filename))
-        bgr_img = cv.imread(filename)
-        bgr_img = cv.resize(bgr_img, (img_width, img_height), cv.INTER_CUBIC)
-        rgb_img = cv.cvtColor(bgr_img, cv.COLOR_BGR2RGB)
-        rgb_img = np.expand_dims(rgb_img, 0)
-        preds = model.predict(rgb_img)
+        full_path = os.path.join(test_path, image_name)
+        print('Start processing image: {}'.format(full_path))
+        img = Image.open(full_path)
+        img.save('images/{}_out.png'.format(i))
+        img = transformer(img)
+        imgs = img.unsqueeze(dim=0)
+        preds = model(imgs)
         prob = np.max(preds)
         class_id = np.argmax(preds)
         text = ('Predict: {}, prob: {}'.format(class_names[class_id][0][0], prob))
         results.append({'label': class_names[class_id][0][0], 'prob': '{:.4}'.format(prob)})
-        cv.imwrite('images/{}_out.png'.format(i), bgr_img)
 
     print(results)
     with open('results.json', 'w') as file:
         json.dump(results, file, indent=4)
-
-    K.clear_session()
