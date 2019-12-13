@@ -74,20 +74,21 @@ Submit predictions of test data set (8,041 testing images) at [Cars Dataset](htt
  ![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/test.jpg)
 
 ### Demo
-Download [pre-trained model](https://github.com/foamliu/Car-Recognition-PyTorch/releases/download/v1.0/model.96-0.89.hdf5) into "models" folder then run:
+
+![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/samples/07647.jpg)
 
 ```bash
-$ python demo.py --i [image_path]
-```
-If no argument, a sample image is used:
-
- ![image](https://github.com/foamliu/Car-Recognition-PyTorch/raw/master/images/samples/07647.jpg)
-
-```bash
-$ python demo.py
 class_name: Lamborghini Reventon Coupe 2008
 prob: 0.9999994
 ```
+
+Download [pre-trained model](https://github.com/foamliu/Car-Recognition-PyTorch/releases/download/v1.0/car_recognition.pt) then run:
+
+```bash
+$ python demo.py
+```
+It picks 20 random valid images to recognize:
+
 
 1 | 2 | 3 | 4 |
 |---|---|---|---|
