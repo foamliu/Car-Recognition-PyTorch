@@ -25,7 +25,7 @@ def train_net(args):
         model = nn.DataParallel(model)
 
         # optimizer = torch.optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, nesterov=True, weight_decay=1e-6)
-        optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=1e-6)
+        optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
 
     else:
         checkpoint = torch.load(checkpoint)
