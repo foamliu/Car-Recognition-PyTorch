@@ -8,16 +8,16 @@ from config import num_classes
 class CarRecognitionModel(nn.Module):
     def __init__(self):
         super(CarRecognitionModel, self).__init__()
-        resnet = models.resnet152(pretrained=True)
+        resnet = models.mobilenet_v2(pretrained=True)
         # Remove linear layer
         modules = list(resnet.children())[:-1]
         self.resnet = nn.Sequential(*modules)
-        self.fc = nn.Linear(2048, num_classes)
+        self.fc = nn.Linear(1280, num_classes)
         self.softmax = nn.Softmax(dim=-1)
 
     def forward(self, images):
         x = self.resnet(images)  # [N, 2048, 1, 1]
-        x = x.view(-1, 2048)  # [N, 2048]
+        x = x.view(-1, 1280)  # [N, 2048]
         x = self.fc(x)
         x = self.softmax(x)
         return x
