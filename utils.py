@@ -87,7 +87,7 @@ def parse_args():
     parser.add_argument('--lr', type=float, default=1e-3, help='start learning rate')
     parser.add_argument('--weight-decay', type=float, default=5e-4, help='weight decay')
     parser.add_argument('--momentum', type=float, default=0.9, help='momentum')
-    parser.add_argument('--batch-size', type=int, default=32, help='batch size in each context')
+    parser.add_argument('--batch-size', type=int, default=16, help='batch size in each context')
     parser.add_argument('--checkpoint', type=str, default=None, help='checkpoint')
     args = parser.parse_args()
     return args
