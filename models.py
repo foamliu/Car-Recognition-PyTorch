@@ -14,7 +14,7 @@ class CarRecognitionModel(nn.Module):
         self.resnet = nn.Sequential(*modules)
         # self.pool = nn.AvgPool2d(kernel_size=7)
         self.fc = nn.Linear(2048, num_classes)
-        self.softmax = nn.Softmax()
+        self.softmax = nn.Softmax(dim=1)
 
     def forward(self, images):
         x = self.resnet(images)  # [N, 2048, 1, 1]
