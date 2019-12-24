@@ -10,7 +10,7 @@ data_transforms = {
     'train': transforms.Compose([
         # transforms.Resize(256),
         # transforms.RandomCrop(224),
-        # transforms.RandomAffine(degrees=20, translate=(0.1, 0.1), scale=(0.8, 1.2)),
+        transforms.RandomAffine(degrees=20, translate=(0.1, 0.1), scale=(0.8, 1.2)),
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
