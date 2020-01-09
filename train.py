@@ -53,7 +53,7 @@ def train_net(args):
 
     # Epochs
     for epoch in range(start_epoch, args.end_epoch):
-        if epochs_since_improvement > patience:
+        if epochs_since_improvement > 0 and epochs_since_improvement % patience == 0:
             adjust_learning_rate(optimizer, shrink_factor=0.1)
 
         lr = get_learning_rate(optimizer)
