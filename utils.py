@@ -84,8 +84,8 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Train face network')
     # general
     parser.add_argument('--end-epoch', type=int, default=1000, help='training epoch size.')
-    parser.add_argument('--lr', type=float, default=0.01, help='start learning rate')
-    parser.add_argument('--weight-decay', type=float, default=5e-4, help='weight decay')
+    parser.add_argument('--lr', type=float, default=0.001, help='start learning rate')
+    parser.add_argument('--weight-decay', type=float, default=1e-6, help='weight decay')
     parser.add_argument('--momentum', type=float, default=0.9, help='momentum')
     parser.add_argument('--nesterov', type=bool, default=True, help='nesterov')
     parser.add_argument('--batch-size', type=int, default=16, help='batch size in each context')

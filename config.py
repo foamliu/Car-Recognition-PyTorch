@@ -14,7 +14,7 @@ num_valid_samples = 1595
 verbose = 1
 batch_size = 16
 num_epochs = 1000
-patience = 50
+patience = 12
 
 # Training parameters
 num_workers = 4  # for data-loading

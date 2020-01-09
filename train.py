@@ -1,13 +1,13 @@
 import numpy as np
 import torch
 from torch import nn
-from torch.optim.lr_scheduler import MultiStepLR
 from torch.utils.tensorboard import SummaryWriter
 
-from config import device, grad_clip, print_freq, num_workers
+from config import device, grad_clip, print_freq, num_workers, patience
 from data_gen import CarRecognitionDataset
 from models import CarRecognitionModel
-from utils import parse_args, save_checkpoint, AverageMeter, clip_gradient, get_logger, accuracy, get_learning_rate
+from utils import parse_args, save_checkpoint, AverageMeter, clip_gradient, get_logger, accuracy, get_learning_rate, \
+    adjust_learning_rate
 
 
 def train_net(args):
@@ -24,7 +24,8 @@ def train_net(args):
         model = CarRecognitionModel()
         model = nn.DataParallel(model)
 
-        optimizer = torch.optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay, nesterov=args.nesterov)
+        optimizer = torch.optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum,
+                                    weight_decay=args.weight_decay, nesterov=args.nesterov)
         # optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
 
     else:
@@ -50,10 +51,15 @@ def train_net(args):
     valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=args.batch_size, shuffle=False,
                                                num_workers=num_workers)
 
-    scheduler = MultiStepLR(optimizer, milestones=[10, 30, 80], gamma=0.1)
-
     # Epochs
     for epoch in range(start_epoch, args.end_epoch):
+        if epochs_since_improvement > patience:
+            adjust_learning_rate(optimizer, shrink_factor=0.1)
+
+        lr = get_learning_rate(optimizer)
+        logger.info('Learning rate: ' + str(lr))
+        writer.add_scalar('model/learning_rate', lr, epoch)
+
         # One epoch's training
         train_loss, train_acc = train(train_loader=train_loader,
                                       model=model,
@@ -65,9 +71,6 @@ def train_net(args):
         writer.add_scalar('model/train_loss', train_loss, epoch)
         writer.add_scalar('model/train_accuracy', train_acc, epoch)
 
-        lr = get_learning_rate(optimizer)
-        writer.add_scalar('model/learning_rate', lr, epoch)
-
         # One epoch's validation
         valid_loss, valid_acc = valid(valid_loader=valid_loader,
                                       model=model,
@@ -76,8 +79,6 @@ def train_net(args):
 
         writer.add_scalar('model/valid_loss', valid_loss, epoch)
         writer.add_scalar('model/valid_accuracy', valid_acc, epoch)
-
-        scheduler.step(epoch)
 
         # Check if there was an improvement
         is_best = valid_acc > best_acc
